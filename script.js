@@ -1,5 +1,5 @@
 function toggleOddsFields() {
-    const num = parseInt(document.getElementById('numOdds').value, 10);
+    const numOdds = parseInt(document.getElementById('numOdds').value, 10);
     const odds3WinContainer = document.getElementById('odds3Win-container');
     const odds3LostContainer = document.getElementById('odds3Lost-container');
     
