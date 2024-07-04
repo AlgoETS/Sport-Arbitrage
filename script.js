@@ -1,3 +1,14 @@
+function toggleOddsFields() {
+    const numOdds = document.getElementById('numOdds').value;
+    const odds3Container = document.getElementById('odds3-container');
+    
+    if (numOdds == 3) {
+        odds3Container.classList.remove('hidden');
+    } else {
+        odds3Container.classList.add('hidden');
+    }
+}
+
 function hasArbitrageOpportunity(odds) {
     const totalInverseOdds = odds.reduce((sum, odd) => sum + (1 / odd), 0);
     return totalInverseOdds < 1;
@@ -25,11 +36,16 @@ function calculateGuaranteedProfit(totalInvestment, totalReturns) {
 }
 
 function calculateArbitrage() {
+    const numOdds = document.getElementById('numOdds').value;
     const odds = [
         parseFloat(document.getElementById('odds1').value),
         parseFloat(document.getElementById('odds2').value),
-        parseFloat(document.getElementById('odds3').value)
     ];
+    
+    if (numOdds == 3) {
+        odds.push(parseFloat(document.getElementById('odds3').value));
+    }
+    
     const totalInvestment = parseFloat(document.getElementById('investment').value);
 
     if (hasArbitrageOpportunity(odds)) {
