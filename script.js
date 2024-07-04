@@ -66,7 +66,7 @@ function calculateArbitrage() {
 
     // Check combinations for 2 odds
     if (numOdds == 2) {
-        if (hasArbitrageOpportunity([odds[0], odds[3]])) {
+        if (hasArbitrageOpportunity([odds[0], odds[2]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3]]);
@@ -80,7 +80,7 @@ function calculateArbitrage() {
             });
         }
 
-        if (hasArbitrageOpportunity([odds[1], odds[2]])) {
+        if (hasArbitrageOpportunity([odds[1], odds[3]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2]]);
@@ -97,7 +97,7 @@ function calculateArbitrage() {
 
     // Check combinations for 3 odds
     if (numOdds == 3) {
-        if (hasArbitrageOpportunity([odds[0], odds[3], odds[4]])) {
+        if (hasArbitrageOpportunity([odds[0], odds[2], odds[4]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3], odds[4]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3], odds[4]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3], odds[4]]);
@@ -111,7 +111,7 @@ function calculateArbitrage() {
             });
         }
 
-        if (hasArbitrageOpportunity([odds[1], odds[2], odds[5]])) {
+        if (hasArbitrageOpportunity([odds[1], odds[3], odds[5]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2], odds[5]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2], odds[5]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2], odds[5]]);
