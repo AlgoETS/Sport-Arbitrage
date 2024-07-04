@@ -11,7 +11,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-4 text-center">Arbitrage Calculator</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">Arbitrage Calculator</h1>
         <div class="space-y-4">
             <div class="input-group">
                 <label for="numOdds" class="block text-sm font-medium text-gray-700">Number of Odds:</label>
@@ -21,24 +21,44 @@
                 </select>
             </div>
             <div class="input-group">
-                <label for="odds1" class="block text-sm font-medium text-gray-700">Odds 1:</label>
-                <input type="number" id="odds1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+                <label for="odds1Win" class="block text-sm font-medium text-gray-700">Win Site 1:</label>
+                <input type="number" id="odds1Win" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Win Site 1 odds">
             </div>
             <div class="input-group">
-                <label for="odds2" class="block text-sm font-medium text-gray-700">Odds 2:</label>
-                <input type="number" id="odds2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+                <label for="odds1Lost" class="block text-sm font-medium text-gray-700">Lost Site 1:</label>
+                <input type="number" id="odds1Lost" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Lost Site 1 odds">
             </div>
-            <div class="input-group hidden" id="odds3-container">
-                <label for="odds3" class="block text-sm font-medium text-gray-700">Odds 3:</label>
-                <input type="number" id="odds3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+            <div class="input-group">
+                <label for="odds2Win" class="block text-sm font-medium text-gray-700">Win Site 2:</label>
+                <input type="number" id="odds2Win" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Win Site 2 odds">
+            </div>
+            <div class="input-group">
+                <label for="odds2Lost" class="block text-sm font-medium text-gray-700">Lost Site 2:</label>
+                <input type="number" id="odds2Lost" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Lost Site 2 odds">
+            </div>
+            <div class="input-group hidden" id="odds3Win-container">
+                <label for="odds3Win" class="block text-sm font-medium text-gray-700">Draw Site 1:</label>
+                <input type="number" id="odds3Win" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Draw Site 1 odds">
+            </div>
+            <div class="input-group hidden" id="odds3Lost-container">
+                <label for="odds3Lost" class="block text-sm font-medium text-gray-700">Draw Site 2:</label>
+                <input type="number" id="odds3Lost" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter Draw Site 2 odds">
             </div>
             <div class="input-group">
                 <label for="investment" class="block text-sm font-medium text-gray-700">Total Investment:</label>
-                <input type="number" id="investment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+                <input type="number" id="investment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01" placeholder="Enter total investment">
             </div>
             <button onclick="calculateArbitrage()" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none">Calculate</button>
         </div>
-        <div id="results" class="mt-4 text-gray-700"></div>
+        <div id="results" class="mt-6 p-4 bg-gray-100 rounded-md shadow-md text-gray-700"></div>
+    </div>
+    <div class="mt-6 text-center text-gray-600">
+        <p>Instructions:</p>
+        <ol class="list-decimal list-inside text-left max-w-md mx-auto">
+            <li>Select the number of odds (2 or 3).</li>
+            <li>Enter the odds values and the total investment amount.</li>
+            <li>Click "Calculate" to see the arbitrage opportunity, percentage, optimal stakes, total returns, and guaranteed profit.</li>
+        </ol>
     </div>
     <script src="script.js"></script>
 </body>
