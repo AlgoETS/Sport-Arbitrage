@@ -4,29 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arbitrage Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Arbitrage Calculator</h1>
-        <div class="input-group">
-            <label for="odds1">Odds 1:</label>
-            <input type="number" id="odds1" step="0.01">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">Arbitrage Calculator</h1>
+        <div class="space-y-4">
+            <div class="input-group">
+                <label for="numOdds" class="block text-sm font-medium text-gray-700">Number of Odds:</label>
+                <select id="numOdds" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" onchange="toggleOddsFields()">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="odds1" class="block text-sm font-medium text-gray-700">Odds 1:</label>
+                <input type="number" id="odds1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="odds2" class="block text-sm font-medium text-gray-700">Odds 2:</label>
+                <input type="number" id="odds2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+            </div>
+            <div class="input-group hidden" id="odds3-container">
+                <label for="odds3" class="block text-sm font-medium text-gray-700">Odds 3:</label>
+                <input type="number" id="odds3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="investment" class="block text-sm font-medium text-gray-700">Total Investment:</label>
+                <input type="number" id="investment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" step="0.01">
+            </div>
+            <button onclick="calculateArbitrage()" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none">Calculate</button>
         </div>
-        <div class="input-group">
-            <label for="odds2">Odds 2:</label>
-            <input type="number" id="odds2" step="0.01">
-        </div>
-        <div class="input-group">
-            <label for="odds3">Odds 3:</label>
-            <input type="number" id="odds3" step="0.01">
-        </div>
-        <div class="input-group">
-            <label for="investment">Total Investment:</label>
-            <input type="number" id="investment" step="0.01">
-        </div>
-        <button onclick="calculateArbitrage()">Calculate</button>
-        <div id="results"></div>
+        <div id="results" class="mt-4 text-gray-700"></div>
     </div>
     <script src="script.js"></script>
 </body>
