@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbitrage Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Arbitrage Calculator</h1>
+        <div class="input-group">
+            <label for="odds1">Odds 1:</label>
+            <input type="number" id="odds1" step="0.01">
+        </div>
+        <div class="input-group">
+            <label for="odds2">Odds 2:</label>
+            <input type="number" id="odds2" step="0.01">
+        </div>
+        <div class="input-group">
+            <label for="odds3">Odds 3:</label>
+            <input type="number" id="odds3" step="0.01">
+        </div>
+        <div class="input-group">
+            <label for="investment">Total Investment:</label>
+            <input type="number" id="investment" step="0.01">
+        </div>
+        <button onclick="calculateArbitrage()">Calculate</button>
+        <div id="results"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
