@@ -13,18 +13,27 @@ function toggleOddsFields() {
 }
 
 function hasArbitrageOpportunity(odds) {
-    const totalInverseOdds = odds.reduce((sum, odd) => sum + (1 / odd), 0);
+    let totalInverseOdds = 0;
+    for (let i = 0; i < odds.length; i++) {
+        totalInverseOdds += 1 / odds[i];
+    }
     return totalInverseOdds < 1;
 }
 
 function calculateArbitragePercentage(odds) {
-    const totalInverseOdds = odds.reduce((sum, odd) => sum + (1 / odd), 0);
+    let totalInverseOdds = 0;
+    for (let i = 0; i < odds.length; i++) {
+        totalInverseOdds += 1 / odds[i];
+    }
     const arbitragePercentage = (1 - totalInverseOdds) * 100;
     return arbitragePercentage;
 }
 
 function calculateOptimalStakes(totalInvestment, odds) {
-    const totalInverseOdds = odds.reduce((sum, odd) => sum + (1 / odd), 0);
+    let totalInverseOdds = 0;
+    for (let i = 0; i < odds.length; i++) {
+        totalInverseOdds += 1 / odds[i];
+    }
     const stakes = odds.map(odd => (totalInvestment * (1 / odd)) / totalInverseOdds);
     return stakes;
 }
@@ -51,41 +60,73 @@ function calculateArbitrage() {
         odds.push(parseFloat(document.getElementById('odds3Win').value));
         odds.push(parseFloat(document.getElementById('odds3Lost').value));
     }
-    
-    const totalInvestment = parseFloat(document.getElementById('investment').value);
 
+    const totalInvestment = parseFloat(document.getElementById('investment').value);
     const arbitrageOpportunities = [];
 
-    // Check combination 1
-    if (hasArbitrageOpportunity([odds[0], odds[3], odds[4]])) {
-        const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3], odds[4]]);
-        const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3], odds[4]]);
-        const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3], odds[4]]);
-        const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
-        arbitrageOpportunities.push({
-            "description": "win-site1, lost-site2, draw-site1",
-            "arbitrage_percentage": arbitragePercentage,
-            "optimal_stakes": optimalStakes,
-            "total_returns": totalReturns,
-            "guaranteed_profit": guaranteedProfit
-        });
+    // Check combinations for 2 odds
+    if (numOdds == 2) {
+        if (hasArbitrageOpportunity([odds[0], odds[3]])) {
+            const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3]]);
+            const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3]]);
+            const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3]]);
+            const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
+            arbitrageOpportunities.push({
+                "description": "win-site1 and lost-site2",
+                "arbitrage_percentage": arbitragePercentage,
+                "optimal_stakes": optimalStakes,
+                "total_returns": totalReturns,
+                "guaranteed_profit": guaranteedProfit
+            });
+        }
+
+        if (hasArbitrageOpportunity([odds[1], odds[2]])) {
+            const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2]]);
+            const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2]]);
+            const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2]]);
+            const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
+            arbitrageOpportunities.push({
+                "description": "lost-site1 and win-site2",
+                "arbitrage_percentage": arbitragePercentage,
+                "optimal_stakes": optimalStakes,
+                "total_returns": totalReturns,
+                "guaranteed_profit": guaranteedProfit
+            });
+        }
     }
 
-    // Check combination 2
-    if (hasArbitrageOpportunity([odds[1], odds[2], odds[5]])) {
-        const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2], odds[5]]);
-        const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2], odds[5]]);
-        const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2], odds[5]]);
-        const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
-        arbitrageOpportunities.push({
-            "description": "lost-site1, win-site2, draw-site2",
-            "arbitrage_percentage": arbitragePercentage,
-            "optimal_stakes": optimalStakes,
-            "total_returns": totalReturns,
-            "guaranteed_profit": guaranteedProfit
-        });
+    // Check combinations for 3 odds
+    if (numOdds == 3) {
+        if (hasArbitrageOpportunity([odds[0], odds[3], odds[4]])) {
+            const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3], odds[4]]);
+            const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3], odds[4]]);
+            const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3], odds[4]]);
+            const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
+            arbitrageOpportunities.push({
+                "description": "win-site1, lost-site2, draw-site1",
+                "arbitrage_percentage": arbitragePercentage,
+                "optimal_stakes": optimalStakes,
+                "total_returns": totalReturns,
+                "guaranteed_profit": guaranteedProfit
+            });
+        }
+
+        if (hasArbitrageOpportunity([odds[1], odds[2], odds[5]])) {
+            const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2], odds[5]]);
+            const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2], odds[5]]);
+            const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2], odds[5]]);
+            const guaranteedProfit = calculateGuaranteedProfit(totalInvestment, totalReturns);
+            arbitrageOpportunities.push({
+                "description": "lost-site1, win-site2, draw-site2",
+                "arbitrage_percentage": arbitragePercentage,
+                "optimal_stakes": optimalStakes,
+                "total_returns": totalReturns,
+                "guaranteed_profit": guaranteedProfit
+            });
+        }
     }
 
+    // Display results
     if (arbitrageOpportunities.length > 0) {
         let resultHTML = '';
         arbitrageOpportunities.forEach(opportunity => {
