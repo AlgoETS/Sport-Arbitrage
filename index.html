@@ -11,7 +11,17 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">Arbitrage Calculator</h1>
+        <div class="mb-6 p-4 bg-blue-100 rounded-md shadow-md">
+            <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">Arbitrage Calculator</h1>
+            <div class="text-center text-gray-600">
+                <p class="font-semibold">Instructions:</p>
+                <ol class="list-decimal list-inside text-left mx-auto text-sm">
+                    <li>Select the number of odds (2 or 3).</li>
+                    <li>Enter the odds values and the total investment amount.</li>
+                    <li>Click "Calculate" to see the arbitrage opportunity, percentage, optimal stakes, total returns, and guaranteed profit.</li>
+                </ol>
+            </div>
+        </div>
         <div class="space-y-4">
             <div class="input-group">
                 <label for="numOdds" class="block text-sm font-medium text-gray-700">Number of Odds:</label>
@@ -51,14 +61,6 @@
             <button onclick="calculateArbitrage()" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none">Calculate</button>
         </div>
         <div id="results" class="mt-6 p-4 bg-gray-100 rounded-md shadow-md text-gray-700"></div>
-    </div>
-    <div class="mt-6 text-center text-gray-600">
-        <p>Instructions:</p>
-        <ol class="list-decimal list-inside text-left max-w-md mx-auto">
-            <li>Select the number of odds (2 or 3).</li>
-            <li>Enter the odds values and the total investment amount.</li>
-            <li>Click "Calculate" to see the arbitrage opportunity, percentage, optimal stakes, total returns, and guaranteed profit.</li>
-        </ol>
     </div>
     <script src="script.js"></script>
 </body>
