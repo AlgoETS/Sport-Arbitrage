@@ -3,7 +3,7 @@ function toggleOddsFields() {
     const odds3WinContainer = document.getElementById('odds3Win-container');
     const odds3LostContainer = document.getElementById('odds3Lost-container');
     
-    if (numOdds == 3) {
+    if (numOdds === 3) {
         odds3WinContainer.classList.remove('hidden');
         odds3LostContainer.classList.remove('hidden');
     } else {
@@ -48,7 +48,7 @@ function calculateGuaranteedProfit(totalInvestment, totalReturns) {
 }
 
 function calculateArbitrage() {
-    const numOdds = document.getElementById('numOdds').value;
+    const numOdds = parseInt(document.getElementById('numOdds').value, 10);
     const odds = [
         parseFloat(document.getElementById('odds1Win').value),
         parseFloat(document.getElementById('odds1Lost').value),
@@ -56,7 +56,7 @@ function calculateArbitrage() {
         parseFloat(document.getElementById('odds2Lost').value)
     ];
 
-    if (numOdds == 3) {
+    if (numOdds === 3) {
         odds.push(parseFloat(document.getElementById('odds3Win').value));
         odds.push(parseFloat(document.getElementById('odds3Lost').value));
     }
@@ -65,8 +65,8 @@ function calculateArbitrage() {
     const arbitrageOpportunities = [];
 
     // Check combinations for 2 odds
-    if (numOdds == 2) {
-        if (hasArbitrageOpportunity([odds[0], odds[2]])) {
+    if (numOdds === 2) {
+        if (hasArbitrageOpportunity([odds[0], odds[3]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3]]);
@@ -80,7 +80,7 @@ function calculateArbitrage() {
             });
         }
 
-        if (hasArbitrageOpportunity([odds[1], odds[3]])) {
+        if (hasArbitrageOpportunity([odds[1], odds[2]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2]]);
@@ -96,8 +96,8 @@ function calculateArbitrage() {
     }
 
     // Check combinations for 3 odds
-    if (numOdds == 3) {
-        if (hasArbitrageOpportunity([odds[0], odds[2], odds[4]])) {
+    if (numOdds === 3) {
+        if (hasArbitrageOpportunity([odds[0], odds[3], odds[4]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[0], odds[3], odds[4]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[0], odds[3], odds[4]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[0], odds[3], odds[4]]);
@@ -111,7 +111,7 @@ function calculateArbitrage() {
             });
         }
 
-        if (hasArbitrageOpportunity([odds[1], odds[3], odds[5]])) {
+        if (hasArbitrageOpportunity([odds[1], odds[2], odds[5]])) {
             const arbitragePercentage = calculateArbitragePercentage([odds[1], odds[2], odds[5]]);
             const optimalStakes = calculateOptimalStakes(totalInvestment, [odds[1], odds[2], odds[5]]);
             const totalReturns = calculateTotalReturn(optimalStakes, [odds[1], odds[2], odds[5]]);
@@ -131,15 +131,17 @@ function calculateArbitrage() {
         let resultHTML = '';
         arbitrageOpportunities.forEach(opportunity => {
             resultHTML += `
-                <p class="font-bold">Arbitrage Opportunity (${opportunity.description}): Yes</p>
-                <p>Arbitrage Percentage (${opportunity.description}): ${opportunity.arbitrage_percentage.toFixed(2)}%</p>
-                <p>Optimal Stakes (${opportunity.description}): ${opportunity.optimal_stakes.map(stake => stake.toFixed(2)).join(', ')}</p>
-                <p>Total Returns (${opportunity.description}): ${opportunity.total_returns.map(ret => ret.toFixed(2)).join(', ')}</p>
-                <p>Guaranteed Profit (${opportunity.description}): ${opportunity.guaranteed_profit.toFixed(2)}</p>
+                <div class="p-4 bg-white rounded-md shadow-md mb-4">
+                    <p class="font-bold text-lg">Arbitrage Opportunity (${opportunity.description}): Yes</p>
+                    <p>Arbitrage Percentage: ${opportunity.arbitrage_percentage.toFixed(2)}%</p>
+                    <p>Optimal Stakes: ${opportunity.optimal_stakes.map(stake => stake.toFixed(2)).join(', ')}</p>
+                    <p>Total Returns: ${opportunity.total_returns.map(ret => ret.toFixed(2)).join(', ')}</p>
+                    <p>Guaranteed Profit: ${opportunity.guaranteed_profit.toFixed(2)}</p>
+                </div>
             `;
         });
         document.getElementById('results').innerHTML = resultHTML;
     } else {
-        document.getElementById('results').innerHTML = '<p class="font-bold">No Arbitrage Opportunities Found</p>';
+        document.getElementById('results').innerHTML = '<p class="font-bold text-lg">No Arbitrage Opportunities Found</p>';
     }
 }
